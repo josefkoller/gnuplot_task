@@ -19,8 +19,12 @@ describe PlotTaskFactory do
       :xlabel=>'strain [m]',
       :ylabel=>'stress [Pa]',
       :data_sets=>[data_set]
+    Rake::Task.clear
+
     factory.define_task
 
+    is_defined = Rake::Task.task_defined? "test_task"
+    is_defined.should be_true
     Rake::Task["test_task"].invoke
   end
 end
